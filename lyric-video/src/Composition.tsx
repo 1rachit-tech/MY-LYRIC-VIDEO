@@ -1,9 +1,19 @@
-import {AbsoluteFill, Audio, Composition, interpolate, spring, useCurrentFrame} from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  Composition,
+  interpolate,
+  spring,
+  useCurrentFrame,
+} from "remotion";
 
 type Props = {};
 
 const AUDIO_URL =
   "https://raw.githubusercontent.com/1rachit-tech/MY-LYRIC-VIDEO/main/lyric-video/song.mp3";
+
+const FPS = 30;
+const DURATION_IN_FRAMES = 6120; // 3:24
 
 const LYRICS = [
   "सफेद साड़ी, माथे पे चंदन",
@@ -20,8 +30,8 @@ const LYRICS = [
   "तेरी एक नज़र से शब्द सजे",
   "कोलोसस सथम केक्कुदु एन नेन्जम थुल्लुदु",
   "भरत नाट्यम पोन्नु नी एन कनवुला निकुदु",
-  "उन कण्णु पेसुम मोझियिल एन वार्च्ताई तोलैन्जिडु",
-  "नी आडुम अंध नोडियिल एन कादल पिरांनिडुदु",
+  "उन कण्णु पेसुम मोझியिल एन वार्च्ताई तोलैन्जிடு",
+  "नी आडुम अंध नोडियिल एन कादल பిరांனிடுதु",
   "टूरिल्स के लिए नहीं, इतिहास के लिए नाच",
   "तेरे हर घूम में संस्कृति झलकी",
   "तेरे गुरु की मेहनत, तेरी तपस्या",
@@ -37,7 +47,7 @@ const LYRICS = [
   "कोलोसस सथम केक्कुदु एन इधयम मेल्डावुदु",
   "नी आडुकिर अझगुला एन उलकम स्लो आगुदु",
   "मुत्थुरैयिल कादल इरुक्कु उन सिरिप्पु मेजिकु",
-  "भरत नाट्यम पोन्नु नी एन वाळक्कैयोड मियूसिक",
+  "भरत नाट्यम पोन्नु नी एन वाळக்கैयोड மியूसிக",
   "आजकल प्यार भी फास्ट फॉरवर्ड पर",
   "तू है पॉज बटन ऑन रिकॉर्ड",
   "तेरे साथ बैठ के खामोशी भी गीत",
@@ -50,9 +60,9 @@ const LYRICS = [
   "मेरी सारी कविता आ जाए आकार में",
   "अगर दुनिया पूछे इंस्पिरेशन कौन",
   "मैं कहूं वो, जो नाचती है मौन",
-  "नी आडुकिर नाळ पोधुमे एन वाळक्कै पूरणमे",
+  "नी आडुकिर नाळ पोधुमे एन वाळक्कै पूरणமே",
   "भरतनाट्यम अझगिनी एन कादल जीवने",
-  "कोलोसस सथम पोलदान उन ஞாபகம் வரूदु",
+  "कोलोसस सथम पोलदान उन ஞாபகம் வரूदு",
   "नी पक्कतुल इल्लन्नालुम एन मनसु तेदुते",
   "तेरा नाच, मेरा सुकून है",
   "नी इल्ला वे नान इल्ला",
@@ -64,8 +74,34 @@ const LYRICS = [
   "तू मेरी पूरी पोएट्री है",
 ] as const;
 
-const DURATION_IN_FRAMES = 6120;
-const FPS = 30;
+// Line duration is weighted by lyric length instead of giving every line the same duration.
+// This is a much closer first-pass sync than the previous equal-duration version.
+const weights = LYRICS.map((line) => Math.max(18, line.length));
+const weightTotal = weights.reduce((sum, value) => sum + value, 0);
+const lineDurations = weights.map((weight) =>
+  Math.round((weight / weightTotal) * DURATION_IN_FRAMES),
+);
+
+// Force the durations to add up to the exact 3:24 composition length.
+lineDurations[lineDurations.length - 1] +=
+  DURATION_IN_FRAMES - lineDurations.reduce((sum, value) => sum + value, 0);
+
+const lineStarts = lineDurations.reduce<number[]>(
+  (starts, duration, index) => {
+    starts.push(index === 0 ? 0 : starts[index - 1] + lineDurations[index - 1]);
+    return starts;
+  },
+  [],
+);
+
+const getSection = (index: number) => {
+  if (index < 12) return "INTRO • CLASSICAL";
+  if (index < 28) return "VERSE • CULTURE";
+  if (index < 44) return "CHORUS • LOVE";
+  return "OUTRO • TIMELESS";
+};
+
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
 export const MyComposition = () => {
   return (
@@ -82,113 +118,242 @@ export const MyComposition = () => {
 
 export const MyComponent: React.FC<Props> = () => {
   const frame = useCurrentFrame();
-  const progress = frame / DURATION_IN_FRAMES;
-  const linePosition = progress * LYRICS.length;
-  const activeIndex = Math.min(
-    LYRICS.length - 1,
-    Math.floor(linePosition),
-  );
-  const localProgress = linePosition - activeIndex;
 
-  const enter = spring({
-    frame: Math.min(20, frame % Math.max(1, Math.floor(DURATION_IN_FRAMES / LYRICS.length))),
+  let activeIndex = lineStarts.findIndex(
+    (start, index) =>
+      frame >= start &&
+      frame < start + lineDurations[index],
+  );
+
+  if (activeIndex === -1) activeIndex = LYRICS.length - 1;
+
+  const start = lineStarts[activeIndex];
+  const duration = lineDurations[activeIndex];
+  const localFrame = frame - start;
+  const local = clamp01(localFrame / Math.max(1, duration));
+  const progress = frame / DURATION_IN_FRAMES;
+
+  const intro = spring({
+    frame: Math.min(localFrame, 24),
     fps: FPS,
-    config: {damping: 14, stiffness: 120, mass: 0.6},
+    config: { damping: 13, stiffness: 120, mass: 0.55 },
   });
 
-  const scale = interpolate(enter, [0, 1], [0.94, 1]);
-  const opacity = interpolate(enter, [0, 1], [0, 1]);
-  const glow = interpolate(localProgress, [0, 0.5, 1], [0.15, 0.5, 0.18]);
+  const exit = interpolate(
+    localFrame,
+    [Math.max(0, duration - 18), duration],
+    [1, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+  );
+
+  const textOpacity = Math.min(1, intro) * exit;
+  const textY = interpolate(intro, [0, 1], [45, 0]);
+  const hue = 265 + Math.sin(frame / 180) * 28;
+  const pulse = 1 + Math.sin(frame / 10) * 0.008;
+
+  const words = LYRICS[activeIndex].split(" ");
+  const previous = activeIndex > 0 ? LYRICS[activeIndex - 1] : "";
+  const next =
+    activeIndex < LYRICS.length - 1 ? LYRICS[activeIndex + 1] : "";
 
   return (
     <AbsoluteFill
       style={{
-        background:
-          "radial-gradient(circle at 50% 35%, #3b1b52 0%, #160f24 42%, #05050a 100%)",
+        background: `radial-gradient(circle at 50% 42%, hsl(${hue} 55% 24%) 0%, #100b19 45%, #030308 100%)`,
         color: "white",
-        fontFamily: "Arial, Noto Sans Devanagari, sans-serif",
+        fontFamily: "Arial, Noto Sans Devanagari, Noto Sans Tamil, sans-serif",
         overflow: "hidden",
       }}
     >
       <Audio src={AUDIO_URL} />
 
-      <AbsoluteFill
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 32%)",
-          opacity: glow,
-        }}
-      />
-
+      {/* Moving cinematic light */}
       <div
         style={{
           position: "absolute",
-          inset: 0,
+          width: 900,
+          height: 900,
+          left: -300 + Math.sin(frame / 95) * 180,
+          top: 260 + Math.cos(frame / 120) * 180,
+          borderRadius: "50%",
           background:
-            "linear-gradient(135deg, rgba(255,255,255,0.06), transparent 28%, transparent 72%, rgba(255,210,120,0.05))",
+            "radial-gradient(circle, rgba(255,190,120,0.16), transparent 65%)",
+          filter: "blur(20px)",
         }}
       />
 
+      {/* Floating particles */}
+      {Array.from({ length: 14 }).map((_, i) => {
+        const x = (i * 83 + 120) % 100;
+        const y =
+          (i * 37 + frame * (0.035 + (i % 3) * 0.012)) % 115;
+        const size = 3 + (i % 3) * 2;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${x}%`,
+              top: `${y - 8}%`,
+              width: size,
+              height: size,
+              borderRadius: "50%",
+              background: "rgba(255,220,170,0.65)",
+              boxShadow: "0 0 14px rgba(255,210,150,0.55)",
+              opacity: 0.25 + (i % 4) * 0.12,
+            }}
+          />
+        );
+      })}
+
+      {/* Top branding */}
       <div
         style={{
           position: "absolute",
-          top: 120,
-          left: 70,
-          right: 70,
+          top: 88,
+          left: 65,
+          right: 65,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          opacity: 0.72,
-          fontSize: 28,
-          letterSpacing: 6,
         }}
       >
-        <span>RACHIT RAM</span>
-        <span>LYRIC VIDEO</span>
+        <div
+          style={{
+            fontSize: 25,
+            fontWeight: 800,
+            letterSpacing: 7,
+            opacity: 0.82,
+          }}
+        >
+          RACHIT RAM
+        </div>
+        <div
+          style={{
+            fontSize: 18,
+            letterSpacing: 3,
+            opacity: 0.52,
+          }}
+        >
+          {getSection(activeIndex)}
+        </div>
       </div>
 
+      {/* Decorative rings */}
+      <div
+        style={{
+          position: "absolute",
+          width: 720,
+          height: 720,
+          borderRadius: "50%",
+          border: "1px solid rgba(255,255,255,0.08)",
+          left: 180,
+          top: 585,
+          transform: `rotate(${frame * 0.08}deg) scale(${1 + Math.sin(frame / 80) * 0.02})`,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          width: 560,
+          height: 560,
+          borderRadius: "50%",
+          border: "1px solid rgba(255,210,150,0.08)",
+          left: 260,
+          top: 665,
+          transform: `rotate(-${frame * 0.12}deg)`,
+        }}
+      />
+
+      {/* Previous lyric */}
+      <div
+        style={{
+          position: "absolute",
+          top: 570,
+          left: 80,
+          right: 80,
+          textAlign: "center",
+          fontSize: 27,
+          lineHeight: 1.35,
+          opacity: 0.13,
+          transform: "scale(0.96)",
+        }}
+      >
+        {previous}
+      </div>
+
+      {/* Main kinetic lyric */}
       <div
         style={{
           position: "absolute",
           top: "50%",
-          left: 60,
-          right: 60,
-          transform: `translateY(-50%) scale(${scale})`,
-          opacity,
+          left: 55,
+          right: 55,
+          transform: `translateY(-50%) translateY(${textY}px) scale(${pulse})`,
+          opacity: textOpacity,
           textAlign: "center",
         }}
       >
         <div
           style={{
-            fontSize: 66,
-            lineHeight: 1.25,
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "0 16px",
+            fontSize: 68,
+            lineHeight: 1.34,
             fontWeight: 800,
-            letterSpacing: 0.5,
             textShadow:
-              "0 0 18px rgba(255,255,255,0.18), 0 8px 40px rgba(0,0,0,0.55)",
+              "0 0 22px rgba(255,255,255,0.2), 0 12px 45px rgba(0,0,0,0.65)",
           }}
         >
-          {LYRICS[activeIndex]}
+          {words.map((word, index) => {
+            const wordStart = index * 5;
+            const wordSpring = spring({
+              frame: Math.max(0, localFrame - wordStart),
+              fps: FPS,
+              config: { damping: 12, stiffness: 150, mass: 0.42 },
+            });
+            const wordOpacity = interpolate(
+              wordSpring,
+              [0, 1],
+              [0.18, 1],
+            );
+            const wordY = interpolate(wordSpring, [0, 1], [24, 0]);
+            return (
+              <span
+                key={`${activeIndex}-${index}`}
+                style={{
+                  display: "inline-block",
+                  opacity: wordOpacity,
+                  transform: `translateY(${wordY}px)`,
+                }}
+              >
+                {word}
+              </span>
+            );
+          })}
         </div>
 
+        {/* Animated underline */}
         <div
           style={{
-            width: 150,
+            width: 210,
             height: 5,
-            margin: "34px auto 0",
-            borderRadius: 999,
-            background: "rgba(255,255,255,0.8)",
-            transform: `scaleX(${interpolate(localProgress, [0, 1], [0.2, 1])})`,
-            transformOrigin: "center",
+            margin: "38px auto 0",
+            borderRadius: 99,
+            background:
+              "linear-gradient(90deg, transparent, rgba(255,220,160,0.95), transparent)",
+            transform: `scaleX(${interpolate(local, [0, 0.25, 1], [0.25, 1, 0.7])})`,
           }}
         />
 
         <div
           style={{
-            marginTop: 28,
-            fontSize: 24,
-            opacity: 0.55,
-            letterSpacing: 4,
+            marginTop: 24,
+            fontSize: 20,
+            letterSpacing: 5,
+            opacity: 0.52,
           }}
         >
           {String(activeIndex + 1).padStart(2, "0")} /{" "}
@@ -196,25 +361,60 @@ export const MyComponent: React.FC<Props> = () => {
         </div>
       </div>
 
+      {/* Next lyric */}
       <div
         style={{
           position: "absolute",
-          bottom: 90,
-          left: 70,
-          right: 70,
-          height: 4,
-          background: "rgba(255,255,255,0.16)",
-          borderRadius: 10,
+          bottom: 420,
+          left: 80,
+          right: 80,
+          textAlign: "center",
+          fontSize: 27,
+          lineHeight: 1.35,
+          opacity: 0.12,
+        }}
+      >
+        {next}
+      </div>
+
+      {/* Timeline progress */}
+      <div
+        style={{
+          position: "absolute",
+          left: 65,
+          right: 65,
+          bottom: 105,
+          height: 5,
+          background: "rgba(255,255,255,0.13)",
+          borderRadius: 99,
         }}
       >
         <div
           style={{
-            height: "100%",
             width: `${progress * 100}%`,
-            background: "rgba(255,255,255,0.8)",
-            borderRadius: 10,
+            height: "100%",
+            borderRadius: 99,
+            background:
+              "linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,215,155,0.95))",
           }}
         />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: 55,
+          left: 65,
+          right: 65,
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 17,
+          letterSpacing: 3,
+          opacity: 0.42,
+        }}
+      >
+        <span>BHARATANATYAM • LOVE RAP</span>
+        <span>ORIGINAL LYRIC VIDEO</span>
       </div>
     </AbsoluteFill>
   );
