@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Audio,
   Composition,
+  staticFile,
   interpolate,
   spring,
   useCurrentFrame,
@@ -423,7 +424,7 @@ function Main() {
 
   return (
     <AbsoluteFill style={{background:c.paper,overflow:"hidden",fontFamily:"Noto Sans Devanagari, Noto Sans Tamil, Arial, sans-serif"}}>
-      <Audio src="https://raw.githubusercontent.com/1rachit-tech/MY-LYRIC-VIDEO/main/lyric-video/song.mp3"/>
+      <Audio src={staticFile("song.mp3")} />
       <div style={{position:"absolute",inset:-30,transform:`translate(${cameraX}px,${cameraY}px)`,transformOrigin:"center"}}><World world={world} frame={frame} c={c}/></div>
       <Paper opacity={world==="PAUSE" ? .10 : .22}/>
 
