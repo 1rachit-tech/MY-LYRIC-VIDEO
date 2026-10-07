@@ -291,7 +291,7 @@ function Lotus({frame,color}:{frame:number;color:string}) {
   );
 }
 
-function WordArt({text,color,size=74,align:"left"}:{text:string;color:string;size?:number;align?:"left"|"center"|"right"}) {
+function WordArt({text,color,size=74,align="left"}:{text:string;color:string;size?:number;align?:"left"|"center"|"right"}) {
   return <div style={{fontFamily:"Noto Sans Devanagari, Noto Sans Tamil, Arial, sans-serif",fontSize:size,fontWeight:800,lineHeight:1.18,letterSpacing:-1.8,textAlign:align,color}}>{text}</div>;
 }
 
