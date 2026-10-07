@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "format": "1080x1920",
+  "fps": 30,
+  "timingStatus": "PROTOTYPE — proportional phrase timing until real vocal alignment",
+  "sequences": [
+    {
+      "id": "S01",
+      "lines": "1-4",
+      "world": "DAWN_STAGE",
+      "concept": "Dancer enters a silent architectural stage. White costume and chandan establish purity; spotlight freezes; ghungroo become rhythm graphics."
+    },
+    {
+      "id": "S02",
+      "lines": "5-8",
+      "world": "TRADITION_VS_MODERN",
+      "concept": "Mudra diagrams collide with modern editorial typography and microphone identity. Traditional gesture physically pushes modern type aside."
+    },
+    {
+      "id": "S03",
+      "lines": "9-12",
+      "world": "INK_AND_RHYTHM",
+      "concept": "Sadhana becomes accumulating ink strokes. A final glance becomes a drawn line that writes the next phrase."
+    },
+    {
+      "id": "S04",
+      "lines": "13-16",
+      "world": "TEMPLE_DREAM",
+      "concept": "Tamil lines move through temple-like circular space. Circle becomes an eye/halo and opens into the next world."
+    },
+    {
+      "id": "S05",
+      "lines": "17-20",
+      "world": "HERITAGE",
+      "concept": "Archival paper, floor/foot diagrams and restrained dancer silhouette make culture feel documented and lived."
+    },
+    {
+      "id": "S06",
+      "lines": "21-24",
+      "world": "SLOW_WORLD",
+      "concept": "Fast-world typography compresses into trails and suddenly stops. Negative space becomes the visual pause."
+    },
+    {
+      "id": "S07",
+      "lines": "25-28",
+      "world": "MYTHOLOGY",
+      "concept": "Kajal becomes an illustrated eye; expressions become diagrammatic facial lines; type and eye geometry merge."
+    },
+    {
+      "id": "S08",
+      "lines": "29-32",
+      "world": "HEART_RECORD",
+      "concept": "Tamil hook creates a circular record. The record grows from typography and becomes a camera portal."
+    },
+    {
+      "id": "S09",
+      "lines": "33-36",
+      "world": "PAUSE",
+      "concept": "Fast-forward typography abruptly freezes at pause. Minimal frame lets the lyric dominate."
+    },
+    {
+      "id": "S10",
+      "lines": "37-40",
+      "world": "TIMELESS",
+      "concept": "Trend language is contrasted with an editorial timeline. Timeless expands beyond the frame."
+    },
+    {
+      "id": "S11",
+      "lines": "41-44",
+      "world": "PAYAL",
+      "concept": "A drawn anklet/sound-wave travels through the composition and literally writes the poem's shape."
+    },
+    {
+      "id": "S12",
+      "lines": "45-48",
+      "world": "INSPIRATION",
+      "concept": "The inspiration question creates an empty stage. A distant dancer appears as the answer."
+    },
+    {
+      "id": "S13",
+      "lines": "49-52",
+      "world": "ABSENCE",
+      "concept": "Presence becomes absence. The dancer disappears but the ghungroo line remains and searches through empty space."
+    },
+    {
+      "id": "S14",
+      "lines": "53-56",
+      "world": "FINALE",
+      "concept": "Microphone closes, stage empties, anklet sound remains. Final portrait returns and resolves to the final poetry."
+    }
+  ]
+}
