@@ -3,7 +3,6 @@ import {
   AbsoluteFill,
   Audio,
   Composition,
-  Easing,
   interpolate,
   spring,
   useCurrentFrame,
@@ -151,7 +150,7 @@ function Main(){
  const inP=spring({frame:Math.min(local,24),fps:FPS,config:{damping:18,stiffness:110,mass:.7}});
  const outP=interpolate(local,[Math.max(0,dur-18),dur],[1,0],{extrapolateLeft:"clamp",extrapolateRight:"clamp"});
  const opacity=clamp(inP)*outP;
- const prev=idx>0?LYRICS[idx-1]:""; const next=idx<LYRICS.length-1?LYRICS[idx+1]:"";
+ const prev=idx>0?LYRICS[idx-1]:"";
  const words=LYRICS[idx].split(" ");
  const dominant=idx%3===0 || [2,3,8,11,16,20,24,29,33,37,41,45,49,53,55].includes(idx);
  const x=interpolate(Math.sin(frame/90),[-1,1],[-45,45]);
