@@ -1,4 +1,4 @@
-import {AbsoluteFill, Audio, interpolate, spring, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Audio, Composition, interpolate, spring, useCurrentFrame} from "remotion";
 
 type Props = {};
 
