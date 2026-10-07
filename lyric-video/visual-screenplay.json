@@ -1,92 +1,232 @@
 {
-  "version": 1,
+  "version": 2,
   "format": "1080x1920",
   "fps": 30,
-  "timingStatus": "PROTOTYPE — proportional phrase timing until real vocal alignment",
+  "timingStatus": "PROTOTYPE — visual direction complete; exact vocal/beat timestamps must be generated from song.mp3 before final sync render",
+  "artDirection": {
+    "referenceLanguage": "premium hand-drawn romantic Indian music-poster illustration",
+    "palette": "ivory paper + rose/wine ink + restrained blush",
+    "recurringCharacters": [
+      "Bharatanatyam dancer",
+      "modern singer with microphone"
+    ],
+    "recurringMotifs": [
+      "chandan",
+      "kajal",
+      "mudra",
+      "ghungroo",
+      "payal",
+      "stage light",
+      "ink stroke",
+      "paper texture",
+      "petals"
+    ],
+    "rule": "lyrics are part of the illustrated world; visuals explain the lyric instead of merely animating subtitles"
+  },
   "sequences": [
     {
       "id": "S01",
-      "lines": "1-4",
-      "world": "DAWN_STAGE",
-      "concept": "Dancer enters a silent architectural stage. White costume and chandan establish purity; spotlight freezes; ghungroo become rhythm graphics."
+      "lines": "1-2",
+      "world": "PORTRAIT",
+      "story": "Introduce her as the emotional hero. A hand-drawn portrait grows from paper; white saree and chandan are visual identity, then the eyes become the camera destination.",
+      "hero": [
+        "सफेद साड़ी",
+        "चंदन",
+        "आंखों में शांति"
+      ],
+      "transition": "A drifting petal crosses the lens and becomes stage light."
     },
     {
       "id": "S02",
-      "lines": "5-8",
-      "world": "TRADITION_VS_MODERN",
-      "concept": "Mudra diagrams collide with modern editorial typography and microphone identity. Traditional gesture physically pushes modern type aside."
+      "lines": "3-4",
+      "world": "STAGE",
+      "story": "The stage materializes around her. The spotlight physically freezes when the lyric says रोशनी ठहर गई. Ghungroo become the first rhythmic graphic.",
+      "hero": [
+        "रोशनी ठहर गई",
+        "घुंघरू",
+        "हार्टबीट"
+      ],
+      "transition": "Ghungroo vibration expands into circular rings and cuts to the next composition."
     },
     {
       "id": "S03",
-      "lines": "9-12",
-      "world": "INK_AND_RHYTHM",
-      "concept": "Sadhana becomes accumulating ink strokes. A final glance becomes a drawn line that writes the next phrase."
+      "lines": "5-8",
+      "world": "DUALITY",
+      "story": "Mudra diagrams and traditional hand language occupy the left while the modern singer and microphone occupy the right. The two visual languages gradually overlap.",
+      "hero": [
+        "मुद्रा",
+        "पुरानी कथा",
+        "माइक",
+        "स्वैग भी झुकता"
+      ],
+      "transition": "The modern typography bends toward the dancer instead of resetting."
     },
     {
       "id": "S04",
-      "lines": "13-16",
-      "world": "TEMPLE_DREAM",
-      "concept": "Tamil lines move through temple-like circular space. Circle becomes an eye/halo and opens into the next world."
+      "lines": "9-12",
+      "world": "SADHANA",
+      "story": "Her dance becomes practice, discipline and accumulated years. Ink strokes build like repeated rehearsal marks; a final glance writes the next lyrical phrase.",
+      "hero": [
+        "साधना",
+        "आराधना",
+        "ताल",
+        "एक नज़र"
+      ],
+      "transition": "The drawn ink line becomes the path into the Tamil section."
     },
     {
       "id": "S05",
-      "lines": "17-20",
+      "lines": "13-16",
       "world": "HERITAGE",
-      "concept": "Archival paper, floor/foot diagrams and restrained dancer silhouette make culture feel documented and lived."
+      "story": "The Tamil lines become a dream inside an Indian heritage space. The dancer is treated with dignity and beauty; gestures, feet and circular movement carry the emotion.",
+      "hero": [
+        "என் நெஞ்சம்",
+        "கனவு",
+        "காதல்"
+      ],
+      "transition": "Circular motion expands into a heritage arch."
     },
     {
       "id": "S06",
-      "lines": "21-24",
-      "world": "SLOW_WORLD",
-      "concept": "Fast-world typography compresses into trails and suddenly stops. Negative space becomes the visual pause."
+      "lines": "17-20",
+      "world": "HERITAGE",
+      "story": "The song explicitly rejects trend-chasing. Visuals become archival: floor, architecture, guru, practice and grounded feet. The dancer is framed as living tradition, not decoration.",
+      "hero": [
+        "इतिहास",
+        "संस्कृति",
+        "गुरु",
+        "तपस्या",
+        "आस्था"
+      ],
+      "transition": "The archival frame opens outward into the modern world."
     },
     {
       "id": "S07",
-      "lines": "25-28",
-      "world": "MYTHOLOGY",
-      "concept": "Kajal becomes an illustrated eye; expressions become diagrammatic facial lines; type and eye geometry merge."
+      "lines": "21-24",
+      "world": "SLOWLOVE",
+      "story": "Fast life is represented by compressed typography and restless horizontal lines; her presence slows the entire composition. The boy becomes quieter and closer.",
+      "hero": [
+        "फास्ट लाइफ",
+        "स्लो सा सुकून",
+        "कम बोले",
+        "साइलेंस"
+      ],
+      "transition": "Motion slows until only a single line remains."
     },
     {
       "id": "S08",
-      "lines": "29-32",
-      "world": "HEART_RECORD",
-      "concept": "Tamil hook creates a circular record. The record grows from typography and becomes a camera portal."
+      "lines": "25-28",
+      "world": "MYTH",
+      "story": "Kajal becomes a visual doorway into mythology. Her eyes and expressions are treated as diagrams of emotion; the rapper's words become handwriting around her face.",
+      "hero": [
+        "माइथोलॉजी",
+        "साइकोलॉजी",
+        "भावम",
+        "विरासत"
+      ],
+      "transition": "The eye closes and opens as the circular Tamil hook begins."
     },
     {
       "id": "S09",
-      "lines": "33-36",
-      "world": "PAUSE",
-      "concept": "Fast-forward typography abruptly freezes at pause. Minimal frame lets the lyric dominate."
+      "lines": "29-32",
+      "world": "POETRY",
+      "story": "The heart of the song becomes intimate. The girl and boy now inhabit one composition. The visual distance between them decreases without becoming melodramatic.",
+      "hero": [
+        "இधயம்",
+        "அழகு",
+        "சிரிப்பு",
+        "மியூசிக்"
+      ],
+      "transition": "A hand-drawn line connects them and becomes the fast-forward track."
     },
     {
       "id": "S10",
-      "lines": "37-40",
-      "world": "TIMELESS",
-      "concept": "Trend language is contrasted with an editorial timeline. Timeless expands beyond the frame."
+      "lines": "33-36",
+      "world": "PAUSE",
+      "story": "Fast-forward and pause become literal visual language. The frame abruptly becomes minimal. The pause is emotional, not an effect.",
+      "hero": [
+        "फास्ट फॉरवर्ड",
+        "पॉज",
+        "खामोशी",
+        "मौजूदगी"
+      ],
+      "transition": "The pause symbol dissolves into a timeless horizontal line."
     },
     {
       "id": "S11",
-      "lines": "41-44",
-      "world": "PAYAL",
-      "concept": "A drawn anklet/sound-wave travels through the composition and literally writes the poem's shape."
+      "lines": "37-40",
+      "world": "TIMELESS",
+      "story": "Trend and viral words are pushed into the background while the dancer remains central. Filters peel away like paper layers, leaving the raw illustrated character.",
+      "hero": [
+        "ट्रेंड",
+        "वायरल",
+        "टाइमलेस",
+        "फिल्टर्स"
+      ],
+      "transition": "The last filter layer tears away and reveals the anklet world."
     },
     {
       "id": "S12",
-      "lines": "45-48",
-      "world": "INSPIRATION",
-      "concept": "The inspiration question creates an empty stage. A distant dancer appears as the answer."
+      "lines": "41-44",
+      "world": "PAYAL",
+      "story": "The payal/ghungroo sound becomes the main drawing instrument. Every jingle leaves an ink path, and that path gradually resembles handwriting and poetry.",
+      "hero": [
+        "पायल",
+        "झनकार",
+        "कविता",
+        "आकार"
+      ],
+      "transition": "The ink handwriting forms the question 'इंस्पिरेशन कौन?'"
     },
     {
       "id": "S13",
-      "lines": "49-52",
-      "world": "ABSENCE",
-      "concept": "Presence becomes absence. The dancer disappears but the ghungroo line remains and searches through empty space."
+      "lines": "45-48",
+      "world": "INSPIRATION",
+      "story": "The question gets a visual answer rather than a subtitle. Empty space holds the question; the dancer slowly appears in the center as the answer. Her movement remains graceful and restrained.",
+      "hero": [
+        "इंस्पिरेशन कौन",
+        "वो",
+        "नाचती है मौन"
+      ],
+      "transition": "Petals fill the negative space and then disappear."
     },
     {
       "id": "S14",
-      "lines": "53-56",
+      "lines": "49-52",
+      "world": "ABSENCE",
+      "story": "The emotional turn: she is no longer visible. The frame searches for her through empty space. Only the memory of her movement and ghungroo remains.",
+      "hero": [
+        "मनसु तेदुते",
+        "तेरा नाच",
+        "मेरा सुकून",
+        "नी इल्ला वे नान इल्ला"
+      ],
+      "transition": "The final ghungroo line leads back to the empty stage."
+    },
+    {
+      "id": "S15",
+      "lines": "53-54",
       "world": "FINALE",
-      "concept": "Microphone closes, stage empties, anklet sound remains. Final portrait returns and resolves to the final poetry."
+      "story": "The microphone is no longer important. The stage is empty, but the ghungroo continue in memory. The visual deliberately slows before the final statement.",
+      "hero": [
+        "माइक बंद",
+        "स्टेज खाली",
+        "घुंघरू दिल में"
+      ],
+      "transition": "A single petal lands on the empty stage."
+    },
+    {
+      "id": "S16",
+      "lines": "55-56",
+      "world": "FINALE",
+      "story": "Final emotional resolution. The girl returns as the same hero portrait from the opening, but now the composition contains both characters' visual history. The final words become the title-sized emotional statement.",
+      "hero": [
+        "अहसास नहीं",
+        "भरतनाट्यम वाली लड़की",
+        "सिर्फ इंस्पिरेशन नहीं",
+        "पूरी पोएट्री"
+      ],
+      "transition": "Hold the final portrait; no generic zoom-out. Let the paper grain and one final petal carry the ending."
     }
   ]
 }
