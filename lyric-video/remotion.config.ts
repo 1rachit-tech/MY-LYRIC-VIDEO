@@ -1,14 +1,11 @@
 /**
- * Note: When using the Node.JS APIs, the config file
- * doesn't apply. Instead, pass options directly to the APIs.
+ * Remotion configuration.
  *
- * All configuration options: https://remotion.dev/docs/config
+ * Keep the Studio bundler dependency-light so it works reliably in
+ * GitHub Codespaces and forwarded browser ports.
  */
-
-import { Config } from "@remotion/cli/config";
-import { enableTailwind } from '@remotion/tailwind-v4';
+import {Config} from "@remotion/cli/config";
 
 Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
-Config.overrideBundlerConfig(enableTailwind);
