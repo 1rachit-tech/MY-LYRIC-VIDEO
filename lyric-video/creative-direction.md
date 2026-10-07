@@ -1,49 +1,107 @@
-# RACHIT RAM — Bharatanatyam Lyric Video
-## Creative Direction v1
+# Rachit Ram — Illustrated Lyric Music Video Direction
 
-This is a 9:16 art-directed 2D/2.5D music visual, not a subtitle template.
+## Creative verdict
 
-### Core idea
-The song contrasts a modern rapper's fast world with the discipline, stillness and heritage of Bharatanatyam. The visual language moves between stage, paper, ink, temple geometry, night and intimate negative space.
+This is a **story-driven illustrated music video**, not a subtitle animation.
 
-### Rules
-- Lyric meaning drives the visual.
-- Typography is a hero, sharing the frame with original 2D illustration and graphic objects.
-- No repetitive zoom/slide/fade treatment.
-- Adjacent lines form continuous visual sequences.
-- Transitions are motivated by an existing object, line, light, gesture or letter.
-- Devanagari/Tamil shaping must remain intact.
-- Important words can become large graphic objects; quiet lines can use negative space.
-- Intensity rises and falls with the song.
-- No stock-photo slideshow and no generic neon lyric-video look.
+The visual reference language is a premium hand-drawn romantic Indian music-poster aesthetic: ivory paper, rose/wine ink, expressive faces, elegant Bharatanatyam imagery, petals, architectural line art and editorial typography.
 
-### Visual worlds
-DAWN_STAGE — warm spotlight, white costume, architectural arch, dancer, ghungroo.
-TRADITION_VS_MODERN — editorial black/cream with modern typographic counterpoint.
-INK_AND_RHYTHM — hand-drawn ink strokes become rhythm lines.
-TEMPLE_DREAM — temple geometry, circles, deep amber/purple atmosphere.
-HERITAGE — archival paper, floor/foot diagrams, restrained dancer silhouette.
-SLOW_WORLD — large negative space and slow camera movement.
-MYTHOLOGY — symbolic eye/kajal geometry.
-HEART_RECORD — circular record/pulse motif.
-PAUSE — near-black minimal compositions for contrast.
-TIMELESS/PAYAL — gold linework and anklet sound-wave.
-INSPIRATION/ABSENCE — empty stage, distant figure and memory layers.
-FINALE — warm red/amber editorial climax, then clean final poetry.
+## Core rule
 
-### Typography
-Use Noto Sans Devanagari / Noto Sans Tamil for robust shaping.
-Hierarchy: hero phrase, editorial label, restrained previous/next lyric, occasional oversized semantic word.
-Alignment varies by sequence: left, centered, edge-aligned and vertical. Never center every lyric.
+**The lyric meaning drives the visual action.**
 
-### Motion
-Use anticipation, inertia, overshoot, follow-through and restrained spring physics. Paper, ink, light, cloth and typography must not move identically. Camera movement continues between related sequences.
+The dancer and the modern singer are recurring characters. Their relationship evolves visually across the song:
 
-### Illustration system
-Original vector-style 2D illustrations: Bharatanatyam dancer, temple arch, ghungroo, ink line, circular record, gesture/hand motifs, editorial diagrams, light and paper layers. Illustration and typography interact.
+1. admiration
+2. fascination
+3. respect for art and tradition
+4. emotional closeness
+5. timeless inspiration
+6. absence
+7. poetic resolution
 
-### Timing
-The current prototype uses proportional phrase timing as a visual-development scaffold only. Final export must use actual vocal word timestamps aligned against the canonical lyrics. Those timestamps become the frozen lyric clock.
+## Character continuity
 
-### Quality bar
-The viewer should think: “This looks art-directed like a real music visual.” Not: “AI animated some subtitles.”
+### Bharatanatyam dancer
+- white/off-white saree
+- chandan
+- expressive eyes/kajal
+- Bharatanatyam posture and mudra language
+- ghungroo/payal
+- calm, dignified expressions
+- recurring face, hair silhouette and costume language
+
+### Modern singer
+- dark modern clothing
+- handheld microphone
+- initially separated visually from the dancer
+- gradually becomes part of the same composition
+- disappears from importance during the emotional finale
+
+## Visual grammar
+
+- illustrated 2D characters
+- SVG line-art and procedural graphics
+- 2.5D camera movement
+- parallax layers
+- paper grain
+- hand-drawn ink strokes
+- petals
+- editorial typography
+- negative space
+- motivated transitions
+
+## Story sequences
+
+The current screenplay contains 16 connected sequences rather than 56 unrelated effects.
+
+Major visual worlds:
+
+PORTRAIT → STAGE → DUALITY → SADHANA → HERITAGE → SLOWLOVE → MYTH → POETRY → PAUSE → TIMELESS → PAYAL → INSPIRATION → ABSENCE → FINALE
+
+## Typography
+
+Typography is subordinate to the illustration when the illustration carries the lyric, and becomes dominant only when the lyric itself is the visual idea.
+
+Do not:
+- center every line
+- animate every word identically
+- use repeated zoom/slide/fade templates
+- pulse everything on every beat
+
+Do:
+- let important words become large graphic objects
+- use negative space for quiet lines
+- allow typography to bend, follow, connect to and emerge from illustrated objects
+- preserve Devanagari and Tamil shaping by animating complete words/phrases
+
+## Audio synchronization
+
+The current artwork engine uses proportional lyric timing as a **development fallback**.
+
+The final render must use:
+- word-level vocal timestamps for lyric timing
+- separate beat/onset data for secondary motion and transitions
+- original song.mp3
+
+Do not alter the supplied lyrics to match an automatic transcription. The canonical lyrics.txt remains the source text.
+
+## Final quality bar
+
+The finished video should read as:
+
+**an illustrated Indian romantic music video with kinetic typography**
+
+and never as:
+
+**AI-generated subtitles over a background.**
+
+## Current status
+
+- Creative direction: complete
+- Connected visual screenplay: complete
+- Illustrated motion-design engine: implemented
+- Audio: connected
+- Exact vocal alignment: pending generation from song.mp3
+- Exact beat map: pending audio analysis
+- Final synced render: pending timing freeze
