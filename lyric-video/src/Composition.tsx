@@ -6,7 +6,6 @@ import {
   Easing,
   interpolate,
   spring,
-  staticFile,
   useCurrentFrame,
 } from "remotion";
 
@@ -159,7 +158,7 @@ function Main(){
  const scale=1+Math.sin(frame/17)*.008;
 
  return <AbsoluteFill style={{background:bg,color:fg,fontFamily:"Noto Sans Devanagari, Noto Sans Tamil, Arial, sans-serif",overflow:"hidden"}}>
-   <Audio src={staticFile("song.mp3")}/>
+   <Audio src="https://raw.githubusercontent.com/1rachit-tech/MY-LYRIC-VIDEO/main/lyric-video/song.mp3"/>
    <div style={{position:"absolute",inset:-120,background:`radial-gradient(circle at ${50+x/3}% 40%, ${accent}26 0%, transparent 42%), radial-gradient(circle at 80% 90%, ${accent}16, transparent 35%)`}}/>
    <Grain opacity={scene==="PAUSE"?.07:.13}/>
    <div style={{position:"absolute",inset:0,background:"linear-gradient(115deg,transparent 0%,rgba(255,255,255,.035) 48%,transparent 52%)",transform:`translateX(${Math.sin(frame/55)*180}px)`}}/>
